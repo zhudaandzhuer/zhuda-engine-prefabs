@@ -12,7 +12,7 @@
     "build": "node tools/build.mjs",
     "typecheck": "tsc --noEmit",
     "doctor": "zhuda-laya-doctor --project .",
-    "test": "node --test tests/",
+    "test": "node --test tests/*.test.mjs",
     "verify": "npm run sync && npm run sync:check && npm run build && npm run typecheck && npm run doctor && npm test",
     "view": "node tools/serve.mjs 8930"
   },

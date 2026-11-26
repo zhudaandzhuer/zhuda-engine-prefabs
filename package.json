@@ -39,7 +39,7 @@
     "pin": "git+https://github.com/zhudaandzhuer/zhuda-laya-engine.git#57b3acecfab8c2f4ec6568e55258df48767e9a1d"
   },
   "scripts": {
-    "test": "node --test tests/",
+    "test": "node --test tests/*.test.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "verify": "npm run typecheck && npm test",
     "verify:all": "node scripts/verify.mjs",
