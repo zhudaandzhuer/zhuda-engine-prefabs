@@ -17,7 +17,7 @@
     "view": "node tools/serve.mjs 8931"
   },
   "dependencies": {
-    "zhuda-laya-engine": "git+https://github.com/zhudaandzhuer/zhuda-laya-engine.git#57b3acecfab8c2f4ec6568e55258df48767e9a1d"
+    "zhuda-laya-engine": "git+https://github.com/zhudaandzhuer/zhuda-laya-engine.git#9786b2ae2ca44bbaf295185b1503acaa2efbf827"
   },
   "devDependencies": {
     "typescript": "5.9.3"

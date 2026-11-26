@@ -7,7 +7,7 @@
 ## 在遊戲裡用
 
 ```sh
-npm install -D git+https://github.com/zhudaandzhuer/zhuda-engine-prefabs.git#<提交或標籤>
+npm install -D git+https://github.com/zhudaandzhuer/zhuda-engine-prefabs.git#v2.1.0
 npx zhuda-prefabs-sync . ui/dom systems/storage   # 把模組和它們依賴的模組複製進遊戲的 src/common/、public/common/
 npx zhuda-prefabs-sync . --check                  # 複製品和這個庫不一樣就失敗
 ```
@@ -16,7 +16,7 @@ npx zhuda-prefabs-sync . --check                  # 複製品和這個庫不一�
 
 ## 版本和引擎的對應
 
-- 版本號前兩碼和引擎對齊：這裡的 `2.0.x` 是在引擎 `2.0.x` 上驗過的。現在是 **2.0.2**，釘的引擎是 2.0.1（`package.json` 的 `zhudaEngine` 和 `devDependencies`）。
+- 版本號前兩碼和引擎對齊：這裡的 `2.1.x` 是在引擎 `2.1.x` 上驗過的。現在是 **2.1.0**（標籤 `v2.1.0`），釘的引擎是 2.1.0（`package.json` 的 `zhudaEngine` 和 `devDependencies`）。
 - 引擎出新的一版時，在那一版上跑過 `npm run verify:all` 再發同號的一版；中間加模組或修模組只升第三碼。
 - 遊戲釘提交或標籤，不釘分支。
 
@@ -237,6 +237,7 @@ npm run verify    # 型別檢查＋測試
   - 沒驗證：沒有人看過圖；這一版引擎沒上手機；3D 的花費沒有在閒置的機器上量；兩個模組的製作腳本（Blender＋MPFB、zhuda-spine2D）都沒有重跑。
   - 生成紀錄（`2d/spine-tights/source/blender/*.png.json`）裡的本機路徑和登入資訊已拿掉；手機截圖裁掉了狀態列。MPFB（GPL-3）不在倉庫裡。
 
+- **2.1.0（2026-11-27）**：跟著引擎 2.1.0 發的同號版本：釘選移到引擎的 `v2.1.0`（那一版起引擎套件不再附帶這個庫），在它上面跑過整套檢查。模組的程式和素材沒有改，遊戲裡的複製品 `--check` 照樣通過。多了 `tests/scenarios.test.mjs`（觀看台的情境檔都是引擎的舞台探針認得的、兩個觀看台用同一支播放工具），那兩項檢查原本在引擎的測試裡。還在引擎 2.0.x 上的遊戲繼續用 2.0.2（或引擎套件裡那份）。
 - **2.0.2（2026-11-26）**：從引擎倉庫搬出來，成為獨立的倉庫 `zhuda-engine-prefabs`。模組的程式和素材沒有改（遊戲裡的複製品對這一版 `--check` 照樣通過）；改的是：套件名稱與 `zhuda-prefabs-sync` 這個指令、鎖定檔的 `library` 改成 `zhuda-engine-prefabs`、觀看台和工具改從引擎的正式入口載入（`zhuda-laya-engine/compiler/…`）、兩個觀看台變成 npm workspaces、`3d/stickman/source/` 的建模腳本改成從 `ZHUDA_ENGINE_CHECKOUT` 找引擎倉庫的人物工具、說明裡的路徑和連結。在引擎 2.0.1 上跑過整套檢查。比 2.0.0 多了 `systems/tutorial`、`2d/tutorial-coach`、兩個分層絲襪模組和火柴人的兩個試作樣式。
 - **2.0.0（2026-11-26）**：整個庫從遊戲中心的 `commonPrefabs/` 搬進引擎倉庫的 `prefabs/`，版本號跟著引擎。程式和素材沒有改；改的是：路徑與說明裡的資料夾名、`3d/stickman` 的做法改用倉庫裡的人物工具（`games/tools/characters/`，原本那份複本刪掉，重建的模型除了產生器標籤以外逐位元組相同）、兩個觀看台的複製品改成驗證時才同步（不進版本庫）、`tools/` 多了從路線庫搬來的 `detplay.mjs` 和 `pixdiff.py`、根目錄多了 `npm run verify:all`。同一天從四款遊戲拆出五樣東西（遊戲本身沒動，也還沒改用庫裡這一份）：`systems/circle-merge`（合一合）、`systems/minigame-host`（木筏亂鬥）、`audio/casual-sfx`（數豬豬）、`3d/seaside-pier` 和 `3d/zhuda-characters` 的 `zhuda-lite`（豬二：打撈吧！）；各有測試，海邊場景有觀看台 preset。同步出去的 TypeScript／CSS 檔頭一行換了字，所以每款遊戲升到 2.0.0 時要重新 sync 一次。引擎在 2.0.0 修了 glTF 動作 crossFade 的問題，`repairGltfCrossFade` 之後叫了也不會再改到東西。
 - **0.9.1（2026-11-25）**：`3d/stickman` 照三視圖逐部位重新對過（使用者：「沒仔細比對、差距還是很大」）。新工具 `source/measure-parts.mjs` 用同樣的正交投影、同樣的比例逐高度量三視圖和模型，正面每列差 0.5 cm 以內，重疊率 0.914／0.899 → **0.934／0.944**。改了：斜肩（頭下緣斜到手臂，不再是衣架肩）、頭和三視圖同大同高（半徑 0.18、總高 1.19 m）、前臂角度與長度（手肘不折、手不垂太低）、胯（胯下 0.47 m、側面厚度對上）、腿側面加厚、腳和小腿的圓角收小（圓頭靴、不像喇叭褲）、**手改成三視圖那種大手套**（四根胖指頭併攏、往掌心勾＋粗拇指，兩隻 600 面、身體 1730 面；同一張表面分兩段減面、手指不做表面鬆弛）。`measure-contour.mjs` 的側面不再算垂在旁邊的手。面數仍 2994、1 個繪製呼叫；crossfade 逐格量手每格最多 1.7 cm、全程連續。交付資料夾 `~/Downloads/需求者需求/交付/` 已換成這一版（多一張 `手對三視圖.jpg`），**還沒傳給 需求者**。
