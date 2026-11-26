@@ -1,0 +1,52 @@
+{
+  "name": "zhuda-engine-prefabs",
+  "version": "2.0.2",
+  "private": true,
+  "description": "豬大引擎（zhuda-laya-engine）的共用元件庫：可重複使用的 2D／3D 資產、介面元件、輸入與系統模組。遊戲用 zhuda-prefabs-sync 複製進自己的專案。",
+  "type": "module",
+  "license": "MIT",
+  "repository": "https://github.com/zhudaandzhuer/zhuda-engine-prefabs",
+  "engines": {
+    "node": ">=24"
+  },
+  "bin": {
+    "zhuda-prefabs-sync": "scripts/sync.mjs"
+  },
+  "files": [
+    "README.md",
+    "AGENTS.md",
+    "LICENSE",
+    "catalog.json",
+    "scripts",
+    "tools",
+    "2d",
+    "3d",
+    "ui",
+    "input",
+    "systems",
+    "audio",
+    "server",
+    "!**/source",
+    "!**/preview"
+  ],
+  "workspaces": [
+    "viewer2d",
+    "viewer3d"
+  ],
+  "zhudaEngine": {
+    "verifiedOn": "2.0.1",
+    "line": "2.0",
+    "pin": "git+https://github.com/zhudaandzhuer/zhuda-laya-engine.git#57b3acecfab8c2f4ec6568e55258df48767e9a1d"
+  },
+  "scripts": {
+    "test": "node --test tests/",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "verify": "npm run typecheck && npm test",
+    "verify:all": "node scripts/verify.mjs",
+    "verify:go": "cd server && go vet ./... && go test ./..."
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "zhuda-laya-engine": "git+https://github.com/zhudaandzhuer/zhuda-laya-engine.git#57b3acecfab8c2f4ec6568e55258df48767e9a1d"
+  }
+}

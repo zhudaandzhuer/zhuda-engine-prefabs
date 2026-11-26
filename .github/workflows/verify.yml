@@ -1,0 +1,33 @@
+# Actions are pinned to a commit, with the release it is in the comment: a tag such as v4 can be
+# moved to other code, a commit cannot.
+name: Verify the prefab library
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    # The library's types and tests, and both viewers built, on the engine this repository pins.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24'
+      - run: npm install --no-audit --no-fund
+      - run: node scripts/verify.mjs
+  server:
+    # The Go packages a game server shares.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
+        with:
+          go-version-file: server/go.mod
+      - run: go vet ./...
+        working-directory: server
+      - run: go test ./...
+        working-directory: server
