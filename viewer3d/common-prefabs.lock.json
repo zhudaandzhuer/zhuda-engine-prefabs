@@ -1,6 +1,6 @@
 {
   "library": "zhuda-engine-prefabs",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "modules": [
     "3d/math",
     "3d/day-look",
